@@ -110,6 +110,17 @@ class UserDataService implements UserDataInterface{
             return false;
         }
     }
+    /*
+     * @see UserBusinessService deleteNewUser
+     */
+    public function deleteUser($user)
+    {}
+    /*
+     * @see UserBusinessService updateNewUser
+     */
+    public function updateUser($user)
+    {}
+
 }
 
 

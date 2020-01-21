@@ -10,7 +10,7 @@ interface UserDataInterface {
     public function createNewUser($user);
     /**
      * Takes in a user
-     * Selects  user from the database and create a user_id session
+     * Selects user from the database and create a user_id session
      * @param $user     User information to login
      * @return true or false for login
      */
@@ -22,4 +22,18 @@ interface UserDataInterface {
      * @return true or false for login
      */
     public function credentials($user);
+    /**
+     * Takes in a user
+     * Deletes user from the database
+     * @param $user     User information to login
+     * @return true or false for login
+     */
+    public function deleteUser($user);
+    /**
+     * Takes in a user
+     * Updates user from the database
+     * @param $user     User information to login
+     * @return true or false for login
+     */
+    public function updateUser($user);
 }
