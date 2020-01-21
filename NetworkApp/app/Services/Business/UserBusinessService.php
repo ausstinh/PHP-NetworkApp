@@ -18,6 +18,12 @@ class UserBusinessService implements UserBusinessInterface{
         $persons = $dbService->CreateNewUser($user);
         return $persons;
     }
+    public function deleteUser($user)
+    {}
+
+    public function updateUser($user)
+    {}
+
 }
 
 

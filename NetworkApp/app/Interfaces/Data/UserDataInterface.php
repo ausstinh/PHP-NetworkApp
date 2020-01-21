@@ -17,7 +17,7 @@ interface UserDataInterface {
     public function authenticateUser($user);
     /**
      * Takes in a user
-     * Checks if user's credentials is in the database
+     * Reads if user's credentials is in the database
      * @param $user     User information to login
      * @return true or false for login
      */
