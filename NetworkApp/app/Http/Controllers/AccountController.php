@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Business\UserBusinessService;
-use App\Models\User;
+use App\Models\UserModel;
 class AccountController extends Controller
 {
     
@@ -15,12 +15,12 @@ class AccountController extends Controller
     {
         $firstName = $request->input('firstname');
         $lastName = $request->input('lastname');
-        $username = $request->input('username');
+        $email = $request->input('email');
         $password = $request->input('password');
 
         $userBS = new UserBusinessService();
      
-        $user = new User(null, $firstName, $lastName, $username, $password, null, null, null, null, null);
+        $user = new UserModel(null, $firstName, $lastName,$password, null, null, null, null, $email);
         
         if($userBS->createNewUser($user))
         {
@@ -37,13 +37,13 @@ class AccountController extends Controller
     public function login(Request $request)
     {
 
-       $username = $request->input('username');
+       $email = $request->input('email');
        $password = $request->input('password');
        $userBS = new UserBusinessService();
 
-       $user = new User(null, null, null, $username, $password, null, null, null, null, null);
+       $user = new UserModel(null, null, null, $password, null, null, null, null, $email);
 
-       $data = ['username' => $username];
+       $data = ['email' => $email];
 
        if($userBS->authenticateUser($user))
        {

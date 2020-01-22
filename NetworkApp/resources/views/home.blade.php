@@ -9,9 +9,12 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
         <!-- Styles -->
         <style>
+        <?php include 'public/css/styles.css'; ?>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -82,7 +85,7 @@
                 </div>
                 <?php
                 if ( isset( $_SESSION['user_id'] ) ) {
-                    ?><h3>Welcome <?php  echo  $username;?></h3>
+                    ?><h3>Welcome <?php  echo  $email;?></h3>
                     <?php 
                 }
                 ?>

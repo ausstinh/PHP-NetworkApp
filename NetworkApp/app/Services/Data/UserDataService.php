@@ -19,7 +19,7 @@ class UserDataService implements UserDataInterface{
         if(!$this->credentials($user))
        {
 
-        $stmt = $connection->prepare("INSERT INTO users (firstname, lastname, username, password, role, company, website, phonenumber, email) VALUES (?,?,?,?,?,?,?,?,?)");
+        $stmt = $connection->prepare("INSERT INTO users (firstname, lastname, password, role, company, website, phonenumber, email) VALUES (?,?,?,?,?,?,?,?)");
 
         if (!$stmt){
             echo "Something went wrong in the binding process. sql error?";
@@ -28,7 +28,6 @@ class UserDataService implements UserDataInterface{
 
         $fn = $user->getFirstName();
         $ln = $user->getLastName();
-        $un = $user->getUsername();
         $role = $user->getRole();
         $password = $user->getPassword();
         $company = $user->getCompany();
@@ -36,7 +35,7 @@ class UserDataService implements UserDataInterface{
         $email = $user->getEmail();
         $phonenumber = $user->getPhonenumber();
 
-        $stmt->bind_param("ssssisssi", $fn, $ln, $un , $password, $role, $company, $website, $email, $phonenumber);
+        $stmt->bind_param("sssissis", $fn, $ln, $password, $role, $company, $website, $phonenumber, $email);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0){
@@ -58,9 +57,9 @@ class UserDataService implements UserDataInterface{
     {
         $db = new Database();
         $connection = $db->getConnection();
-        $attemptedLoginName = $user->getUsername();
+        $attemptedLoginEmail = $user->getEmail();
         $attemptedPassword = $user->getPassword();
-        $stmt = "SELECT id, firstname, lastname, username, password, role, company, website, phonenumber, email FROM users WHERE username = '$attemptedLoginName' AND password = '$attemptedPassword' LIMIT 1";
+        $stmt = "SELECT id, firstname, lastname, password, role, company, website, phonenumber, email FROM users WHERE email = '$attemptedLoginEmail' AND password = '$attemptedPassword' LIMIT 1";
      
         $result = mysqli_query($connection, $stmt);
        
@@ -74,7 +73,7 @@ class UserDataService implements UserDataInterface{
 
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION = null;
-                $_SESSION['username'] = $row['username'];
+                $_SESSION['email'] = $row['email'];
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['role'] = $row['role'];
 
@@ -90,10 +89,10 @@ class UserDataService implements UserDataInterface{
         $db = new Database();
         $connection = $db->getConnection();
 
-        $attemptedLoginName = $user->getUsername();
+        $attemptedLoginEmail = $user->getEmail();
         $attemptedPassword = $user->getPassword();
 
-        $stmt = "SELECT id, firstname, lastname, username, password, role, company, website, phonenumber, email FROM users WHERE username = '$attemptedLoginName' AND password = '$attemptedPassword' LIMIT 1";
+        $stmt = "SELECT id, firstname, lastname, password, role, company, website, phonenumber, email FROM users WHERE email = '$attemptedLoginEmail' AND password = '$attemptedPassword' LIMIT 1";
 
         $result = mysqli_query($connection, $stmt);
         
@@ -113,12 +112,12 @@ class UserDataService implements UserDataInterface{
     /*
      * @see UserBusinessService deleteNewUser
      */
-    public function deleteUser($user)
+    public function terminateUser($user)
     {}
     /*
      * @see UserBusinessService updateNewUser
      */
-    public function updateUser($user)
+    public function refurbishUser($user)
     {}
 
 }
