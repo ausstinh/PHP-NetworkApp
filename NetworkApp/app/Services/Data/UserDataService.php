@@ -1,6 +1,6 @@
 <?php
 namespace App\Services\Data;
-use App\Models\Database;
+use App\Models\DatabaseModel;
 use App\Interfaces\Data\UserDataInterface;
 session_start();
 
@@ -12,7 +12,7 @@ class UserDataService implements UserDataInterface{
      */
     public function createNewUser($user){
 
-        $db = new Database();
+        $db = new DatabaseModel();
 
         $connection = $db->getConnection();
 
@@ -55,7 +55,7 @@ class UserDataService implements UserDataInterface{
      */
     public function authenticateUser($user)
     {
-        $db = new Database();
+        $db = new DatabaseModel();
         $connection = $db->getConnection();
         $attemptedLoginEmail = $user->getEmail();
         $attemptedPassword = $user->getPassword();
@@ -86,7 +86,7 @@ class UserDataService implements UserDataInterface{
 
     public function credentials($user)
     {
-        $db = new Database();
+        $db = new DatabaseModel();
         $connection = $db->getConnection();
 
         $attemptedLoginEmail = $user->getEmail();
