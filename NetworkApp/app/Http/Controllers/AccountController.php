@@ -5,22 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Business\UserBusinessService;
-use App\Models\User;
+use App\Models\UserModel;
 class AccountController extends Controller
 {
-    
-     //Uses the UserBusinessService createNewUser method and returns its result
-     
+    /**
+	 * Takes in a new user 
+	 * Calls the business service to register 
+	 * If successful, return the login form 
+	 * If not, return the register form
+	 * 
+	 * @param newUser	user to register
+	 * @return login view page
+	 */
     public function register(Request $request)
     {
         $firstName = $request->input('firstname');
         $lastName = $request->input('lastname');
-        $username = $request->input('username');
+        $email = $request->input('email');
         $password = $request->input('password');
 
         $userBS = new UserBusinessService();
      
-        $user = new User(null, $firstName, $lastName, $username, $password, null, null, null, null, null);
+        $user = new UserModel(null, $firstName, $lastName,$password, null, null, null, null, $email);
         
         if($userBS->createNewUser($user))
         {
@@ -33,17 +39,24 @@ class AccountController extends Controller
         
     }
     
-    //Uses the UserBusinessService authenticateUser method and returns its result
+    /**
+	 * Takes in a user to log in with 
+	 * Calls the business service to login 
+	 * If successful, return index page If not, return the login form
+	 * 
+	 * @param attemptedLogin	user to log in with
+	 * @return home view page with user data
+	 */
     public function login(Request $request)
     {
 
-       $username = $request->input('username');
+       $email = $request->input('email');
        $password = $request->input('password');
        $userBS = new UserBusinessService();
 
-       $user = new User(null, null, null, $username, $password, null, null, null, null, null);
+       $user = new UserModel(null, null, null, $password, null, null, null, null, $email);
 
-       $data = ['username' => $username];
+       $data = ['email' => $email];
 
        if($userBS->authenticateUser($user))
        {
@@ -55,10 +68,15 @@ class AccountController extends Controller
          return view("login");
        
     }
-
+    /**
+     * Takes in a user to loggout with
+     * returns a redirect to destroy session and login view page
+     *
+     * @param attemptedLogin	user to log in with
+     * @return redirect to login view page with session destroyed
+     */
     public function logout(Request $request) {
         Auth::logout();
-        //return login screen upon logging out
         return redirect('/login');
     }
     

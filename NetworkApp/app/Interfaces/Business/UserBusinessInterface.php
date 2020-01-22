@@ -28,12 +28,12 @@ interface UserBusinessInterface{
      * @param $user     User information to login
      * @return true or false for login
      */
-    public function deleteUser($user);
+    public function terminateUser($user);
     /**
      * Takes in a user
      * Updates user from the database
      * @param $user     User information to login
      * @return true or false for login
      */
-    public function updateUser($user);
+    public function refurbishUser($user);
 }

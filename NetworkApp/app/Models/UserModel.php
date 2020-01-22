@@ -1,9 +1,8 @@
 <?php
 namespace App\Models;
-class User{
+class UserModel{
     
     private $id;
-    private $username;
     private $password;
     private $firstname;
     private $lastname;
@@ -13,10 +12,9 @@ class User{
     private $phonenumber;
     private $email;
     
-    public function __construct($id, $firstname, $lastname, $username, $password, $role, $company, $website, $phonenumber, $email)
+    public function __construct($id, $firstname, $lastname, $password, $role, $company, $website, $phonenumber, $email)
     {
         $this->id = $id;
-        $this->username = $username;
         $this->password = $password;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -105,15 +103,7 @@ class User{
     {
         return $this->id;
     }
-    
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-    
+   
     /**
      * @return mixed
      */
@@ -146,14 +136,7 @@ class User{
     {
         $this->id = $id;
     }
-    
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
+  
     
     /**
      * @param mixed $password

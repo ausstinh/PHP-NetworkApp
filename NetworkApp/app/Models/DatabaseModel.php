@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-class Database{
+class DatabaseModel{
     
     private $servername = "localhost";
     private $username = "root";
@@ -9,7 +9,7 @@ class Database{
     private $port = "8888";
     
     function getConnection(){
-        // Create connection
+        // Create connection to the database
         $conn = mysqli_connect($this->servername,$this->username,$this->password,$this->dbname, $this->port);
         
         if( $conn->connect_error){
