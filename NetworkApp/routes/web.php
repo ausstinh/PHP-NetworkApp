@@ -13,17 +13,20 @@
 
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
+
 Route::get('/', function () {
-        return view('login');
-});
+    return view('login');
+})->name('index');
+
 Route::get('/register', function(){
-   return view('register'); 
-});
+  return view('register'); 
+})->name('register');
 
 Route::get('/home', function(){
     return view('home'); 
-});
-    Route::get('logout', 'AccountController@logout');
+})->name('home');
+
+Route::get('logout', 'AccountController@logout')->name('logout');
 Route::post('/loginuser','AccountController@login');
 Route::post('/registeruser','AccountController@Register');

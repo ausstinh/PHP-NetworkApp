@@ -26,27 +26,27 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" name="firstname" placeholder="firstname">
+						<input type="text" class="form-control" name="firstname" placeholder="First Name">
 						
 					</div>
 						<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" name="lastname" placeholder="lastname">
+						<input type="text" class="form-control" name="lastname" placeholder="Last Name">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" name="email" placeholder="email address">						
+						<input type="text" class="form-control" name="email" placeholder="Email Address">						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="text" class="form-control" name="password" placeholder="password">
+						<input type="text" class="form-control" name="password" placeholder="Password">
 					</div>
 					<div class="form-group center">
 						<input type="submit" value="Register" class="btn float-right login_btn">
