@@ -3,8 +3,12 @@ html,body{
 background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
 background-size: cover;
 background-repeat: no-repeat;
+background-color: #fff;
+color: #ffffff;
+font-family: 'Raleway', sans-serif;
+font-weight: 100;
+margin: 0;
 height: 100%;
-font-family: 'Numans', sans-serif;
 }
 
 .container{
@@ -83,10 +87,58 @@ color: white;
 
 .links a{
 margin-left: 4px;
+color: #ffffff;
+padding: 0 25px;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: .1rem;
+text-decoration: none;
+text-transform: uppercase;
 }
 
 .center{
 	display: flex;
   align-items: center;
   justify-content: center;
+}
+ .full-height{
+    height: 100vh;
+}
+ .flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.m-b-md {
+    margin-bottom: 30px;
+}
+ .position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+ <!-- Navbar -->
+.navbar-light .navbar-brand {
+    color: #ffffff;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #ffffff;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+    color: yellow;
+}
+.nav-link {
+	font-size: 20px;
 }

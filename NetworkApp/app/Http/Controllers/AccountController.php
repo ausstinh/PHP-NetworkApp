@@ -54,14 +54,11 @@ class AccountController extends Controller
        $password = $request->input('password');
        $userBS = new UserBusinessService();
 
-       $user = new UserModel(null, null, null, $password, null, null, null, null, $email);
-
-       $data = ['email' => $email];
+       $user = new UserModel(null, null, null, $password, null, null, null, null, $email);  
 
        if($userBS->authenticateUser($user))
        {
-
-          return view("home")->with($data);
+           return view("home");
        }
        else
 
