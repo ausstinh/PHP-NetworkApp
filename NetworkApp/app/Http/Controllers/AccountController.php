@@ -19,21 +19,23 @@ class AccountController extends Controller
 	 */
     public function register(Request $request)
     {
+        //variables to store user input
         $firstName = $request->input('firstname');
         $lastName = $request->input('lastname');
         $email = $request->input('email');
         $password = $request->input('password');
-
+        //new instance of business service
         $userBS = new UserBusinessService();
-     
+        //create new user and with variables holding user input
         $user = new UserModel(null, $firstName, $lastName,$password, null, null, null, null, $email);
-        
+        //if statement checking if createNewUser returns true
         if($userBS->createNewUser($user))
         {
+            //if true, return login view
             return view("login");
         }
         else{
-
+            //if false, re-return register page so user can try again
             return view("register");
         }
         
@@ -49,19 +51,21 @@ class AccountController extends Controller
 	 */
     public function login(Request $request)
     {
-
+       //two variables to store user email and password
        $email = $request->input('email');
        $password = $request->input('password');
+       //create new instance of userBusinessService
        $userBS = new UserBusinessService();
-
+        //create new user with variables storing user input
        $user = new UserModel(null, null, null, $password, null, null, null, null, $email);  
-
+        //if statement using authenticate method from business service class passing new user created
        if($userBS->authenticateUser($user))
        {
+           //if user is successfully authenticated, return view displaying success
            return view("home");
        }
        else
-
+        //if user is not authenticated successfully, return login view so user can attempt to login again
          return view("login");
        
     }
