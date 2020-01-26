@@ -12,14 +12,18 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+                <!-- Home page -->
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
+                <!-- Login page -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
+                <!-- Register page -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('register') }}">Register</a>
                 </li>  
+                <!-- Logout page -->
                  <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 </li>    

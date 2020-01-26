@@ -19,6 +19,7 @@
 			<div class="card-header">
 				<h3>Register</h3>
 			</div>
+			<!-- Stores user entered information for controller to use using POST method -->
 			<div class="card-body" style="padding: 1.00rem;">
 				<form action = "registeruser" method = "post">
 				<input type = "hidden" name = "_token" value = "<?php echo csrf_token()?>"/>
@@ -54,9 +55,10 @@
 				
 				</form>
 			</div>
+			<!-- Link to sign in if user has account already -->
 			<div class="card-footer" style="background-color: rgba(0,0,0,0.5)">
 				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="login">Sign In</a>
+					Already have an account?<a href="login">Sign In</a>
 				</div>
 			</div>
 			
