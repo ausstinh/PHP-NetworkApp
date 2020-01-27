@@ -23,7 +23,6 @@ class UserBusinessService implements UserBusinessInterface{
 
     public function refurbishUser($user)
     {}
-
 }
 
 

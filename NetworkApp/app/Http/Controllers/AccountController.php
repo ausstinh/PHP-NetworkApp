@@ -26,7 +26,7 @@ class AccountController extends Controller
 
         $userBS = new UserBusinessService();
      
-        $user = new UserModel(null, $firstName, $lastName,$password, null, null, null, null, $email);
+        $user = new UserModel(null, $firstName, $lastName, $email, $password, 0);
         
         if($userBS->createNewUser($user))
         {
@@ -54,11 +54,17 @@ class AccountController extends Controller
        $password = $request->input('password');
        $userBS = new UserBusinessService();
 
-       $user = new UserModel(null, null, null, $password, null, null, null, null, $email);  
-
-       if($userBS->authenticateUser($user))
+       $attemptedUser = new UserModel(null, null, null, $email, $password, null);  
+       $user = $userBS->authenticateUser($attemptedUser);
+       if($user)
        {
-           return view("home");
+          $_SESSION['email'] = $user->getEmail();
+          $_SESSION['user_id'] = $user->getId();
+          $_SESSION['role'] = $user->getRole();
+          
+          $data = ['model' => $user];
+          
+           return view("home")->with($data);
        }
        else
 

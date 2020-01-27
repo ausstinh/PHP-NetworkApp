@@ -2,6 +2,7 @@
 namespace App\Services\Data;
 use App\Models\DatabaseModel;
 use App\Interfaces\Data\UserDataInterface;
+use App\Models\UserModel;
 session_start();
 
 class UserDataService implements UserDataInterface{
@@ -19,23 +20,20 @@ class UserDataService implements UserDataInterface{
         if(!$this->credentials($user))
        {
 
-        $stmt = $connection->prepare("INSERT INTO users (firstname, lastname, password, role, company, website, phonenumber, email) VALUES (?,?,?,?,?,?,?,?)");
+        $stmt = $connection->prepare("INSERT INTO users (firstname, lastname, email, password, role) VALUES (?,?,?,?,?)");
 
         if (!$stmt){
             echo "Something went wrong in the binding process. sql error?";
             exit;
         }
-
+        $email = $user->getEmail();
         $fn = $user->getFirstName();
         $ln = $user->getLastName();
         $role = $user->getRole();
         $password = $user->getPassword();
-        $company = $user->getCompany();
-        $website = $user->getWebsite();
-        $email = $user->getEmail();
-        $phonenumber = $user->getPhonenumber();
 
-        $stmt->bind_param("sssissis", $fn, $ln, $password, $role, $company, $website, $phonenumber, $email);
+
+        $stmt->bind_param("ssssi", $fn, $ln, $email, $password, $role);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0){
@@ -56,32 +54,29 @@ class UserDataService implements UserDataInterface{
     public function authenticateUser($user)
     {
         $db = new DatabaseModel();
-        $connection = $db->getConnection();
+        $connection = $db->getConnection();  
         $attemptedLoginEmail = $user->getEmail();
         $attemptedPassword = $user->getPassword();
-        $stmt = "SELECT id, firstname, lastname, password, role, company, website, phonenumber, email FROM users WHERE email = '$attemptedLoginEmail' AND password = '$attemptedPassword' LIMIT 1";
-     
+        $stmt = "SELECT id, firstname, lastname, password, role, email FROM users WHERE email = '$attemptedLoginEmail' AND password = '$attemptedPassword' LIMIT 1";
+        
         $result = mysqli_query($connection, $stmt);
-       
-
-        if (!$result){ 
-            return false;
-        }
-
-        else if ($result) {
-            if (mysqli_num_rows($result) == 1) {
-
-                $row = mysqli_fetch_assoc($result);
-                $_SESSION = null;
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['user_id'] = $row['id'];
-                $_SESSION['role'] = $row['role'];
-
+        
+        
+        if (!$result){
             return true;
         }
-
-        mysqli_close($connection);
-    }
+        
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+           $id = $row['id'];
+           $fn =  $row['firstname'];
+           $ln = $row['lastname'];
+           $role = $row['role'];
+        }
+   
+        $p = new UserModel($id, $fn, $ln, $attemptedLoginEmail, $attemptedPassword, $role);
+               
+        return $p;      
  }
 
     public function credentials($user)
@@ -92,7 +87,7 @@ class UserDataService implements UserDataInterface{
         $attemptedLoginEmail = $user->getEmail();
         $attemptedPassword = $user->getPassword();
 
-        $stmt = "SELECT id, firstname, lastname, password, role, company, website, phonenumber, email FROM users WHERE email = '$attemptedLoginEmail' AND password = '$attemptedPassword' LIMIT 1";
+        $stmt = "SELECT id, firstname, lastname, password, role, email FROM users WHERE email = '$attemptedLoginEmail' AND password = '$attemptedPassword' LIMIT 1";
 
         $result = mysqli_query($connection, $stmt);
         
@@ -120,6 +115,7 @@ class UserDataService implements UserDataInterface{
     public function refurbishUser($user)
     {}
 
+    
 }
 
 
