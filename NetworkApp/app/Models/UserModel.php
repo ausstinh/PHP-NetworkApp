@@ -12,40 +12,14 @@ class UserModel{
     private $phonenumber;
     private $email;
     
-    public function __construct($id, $firstname, $lastname, $password, $role, $company, $website, $phonenumber, $email)
+    public function __construct($id, $firstname, $lastname, $email, $password, $role)
     {
         $this->id = $id;
         $this->password = $password;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->role = $role;
-        $this->company = $company;
-        $this->website = $website;
-        $this->phonenumber = $phonenumber;
         $this->email = $email;
-    }
-    /**
-     * @return mixed
-     */
-    public function getCompany()
-    {
-        return $this->company;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWebsite()
-    {
-        return $this->website;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPhonenumber()
-    {
-        return $this->phonenumber;
     }
 
     /**
@@ -55,31 +29,6 @@ class UserModel{
     {
         return $this->email;
     }
-
-    /**
-     * @param mixed $company
-     */
-    public function setCompany($company)
-    {
-        $this->company = $company;
-    }
-
-    /**
-     * @param mixed $website
-     */
-    public function setWebsite($website)
-    {
-        $this->website = $website;
-    }
-
-    /**
-     * @param mixed $phonenumber
-     */
-    public function setPhonenumber($phonenumber)
-    {
-        $this->phonenumber = $phonenumber;
-    }
-
     /**
      * @param mixed $email
      */

@@ -27,6 +27,12 @@ Route::get('/home', function(){
     return view('home'); 
 })->name('home');
 
+Route::get('/profile', function(){
+    return view('profile');
+})->name('profile');
+
 Route::get('logout', 'AccountController@logout')->name('logout');
+
 Route::post('/loginuser','AccountController@login');
 Route::post('/registeruser','AccountController@Register');
+Route::post('/useredit','ProfileController@Edit');
